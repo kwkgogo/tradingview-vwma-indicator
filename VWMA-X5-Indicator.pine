@@ -2,20 +2,17 @@
 indicator(title="VWMA ×5 (length-only, 3 enabled by default)", shorttitle="VWMA×5",
      overlay=true, timeframe="", timeframe_gaps=true)
 
-
 // ===== Global =====
 src    = input.source(close, "Source")
 offset = input.int(0, "Offset", minval=-500, maxval=500)
-
 
 // ===== Lengths (0 = hide) =====
 grp_len = "Lengths (0 = hide)"
 len1 = input.int(9,   "VWMA 1", minval=0, group=grp_len)
 len2 = input.int(20,  "VWMA 2", minval=0, group=grp_len)
 len3 = input.int(50,  "VWMA 3", minval=0, group=grp_len)
-len4 = input.int(0,   "VWMA 4", minval=0, group=grp_len)     // 默认隐藏
-len5 = input.int(0,   "VWMA 5", minval=0, group=grp_len)     // 默认隐藏
-
+len4 = input.int(0,   "VWMA 4", minval=0, group=grp_len) 
+len5 = input.int(0,   "VWMA 5", minval=0, group=grp_len)
 
 // ===== Compute (length=0 -> hide) =====
 v1 = len1 > 0 ? ta.vwma(src, len1) : na
@@ -23,7 +20,6 @@ v2 = len2 > 0 ? ta.vwma(src, len2) : na
 v3 = len3 > 0 ? ta.vwma(src, len3) : na
 v4 = len4 > 0 ? ta.vwma(src, len4) : na
 v5 = len5 > 0 ? ta.vwma(src, len5) : na
-
 
 // ===== Plots =====
 plot(v1, title="VWMA 1", color=#2962FF, linewidth=2, offset=offset)
